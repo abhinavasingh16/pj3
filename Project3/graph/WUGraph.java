@@ -126,6 +126,13 @@ public class WUGraph {
           break;
         }else{
           holder = pointer.listNode.list.getSize();
+          DListNode2 point = pointer.listNode.list.head().next();
+          while (point != pointer.listNode.list.head()){
+            Edge targetEdge = ((Edge) point.getVertex());
+            VertexPair targetPair = targetEdge.vertexPair();
+            this.removeEdge(targetPair.object1(), targetPair.object2());
+            point = point.next();
+          }
           break;
         }
       }
@@ -133,7 +140,6 @@ public class WUGraph {
     }
     vertexTable.remove(vertex);
     this.vertexNumber--;
-    this.edgeNumber = this.edgeNumber - holder;
   }
 
   /**
