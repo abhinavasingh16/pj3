@@ -62,6 +62,9 @@ public class SListNode {
     this.next = null;
   }
 
+  /**
+  *   A stimple toString() method for debugging. Returns a string. 
+  **/
   public String toString(){
     String result = entry.toString();
     return result;
@@ -74,22 +77,36 @@ public class SListNode {
     return this.entry;
   }
 
+  /**
+  *   sets the Entry of a SListNode to something else. 
+  **/
   public void setEntry(Entry entry1){
       this.entry = entry1;
   }
 
+  /**
+  *   gets the item() at the corresponding SListNode. 
+  **/
   public Object item(){
     return this.item;
   }
-
+  /**
+  *   next() gets the node that this SListNode points to next. 
+  **/
   public SListNode next(){
     return this.next;
   }
-
+  
+  /**
+  *   listNode() gets the listNode stored by the SListNode. 
+  **/
   public DListNode2 listNode(){
     return this.listNode;
   }
-
+  
+  /**
+  *   listNode2() gets the second listNode that the SListNode points to. 
+  **/
   public DListNode2 listNode2(){
     return this.listNode2;
   }

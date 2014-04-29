@@ -52,13 +52,16 @@ public class DList2 {
   }
 
   /**
-   *  getSize() gets the size of the DList2.
+   *  getSize() gets the size of the DList2 and returns an int. 
    **/
 
   public int getSize(){
     return this.size;
   }
 
+  /**
+  *   setSize() sets the size of the DList2 to a certain number. 
+  **/
   public void setSize(int size1){
     this.size = size1;
   }
@@ -89,7 +92,9 @@ public class DList2 {
     size++;
   }
 
-  //insertEnd() inserts an item at the end of a DList2 behind the sentinel. 
+  /**
+  *   insertEnd() inserts an item at the end of a DList2 behind the sentinel. 
+  **/       
   public void insertEnd(Object vertex1){
     DListNode2 newNode = new DListNode2(vertex1);
     head.prev.next = newNode;
@@ -98,6 +103,11 @@ public class DList2 {
     head.prev = head.prev.next;
     size++;
   }
+
+  /**
+  *   removeNode() removes a node containing the given 
+  *                vertex object in the DList. 
+  **/
 
   public void removeNode(Object vertex1){
     if (size == 0) {
@@ -134,6 +144,9 @@ public class DList2 {
     }
   }
 
+  /**
+  *   This is just a toString() method for debuggin purposes. 
+  **/
   public String toString(){
     String result = "{ ";
     for (int i = 0; i <= size; i++){

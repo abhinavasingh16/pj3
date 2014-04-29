@@ -28,7 +28,23 @@ public class HashTableChained implements Dictionary {
    *  entries.  (The precise number of buckets is up to you, but we recommend
    *  you use a prime number, and shoot for a load factor between 0.5 and 1.)
    **/
+    public HashTableChained(int sizeEstimate) {
+        int numBuckets = sizeEstimate;
+        while (!isPrime(numBuckets)){
+          numBuckets++;
+        }
+        this.baseArray = new SList[numBuckets];
+        this.internalVertices = new DList2();
+        this.dictSize = 0; 
+        for (int i = 0; i < numBuckets; i++){
+          this.baseArray[i] = new SList();
+        }
+    }
 
+  
+  /**
+  *   isPrime() checks to see if a number is prime. 
+  **/
   private boolean isPrime(int n){
     int limit = (int)(Math.sqrt((double)n));
     for (int divisor = 2; divisor <= limit; divisor++){
@@ -39,24 +55,11 @@ public class HashTableChained implements Dictionary {
     return true;
   }
 
-  public HashTableChained(int sizeEstimate) {
-      int numBuckets = sizeEstimate;
-      while (!isPrime(numBuckets)){
-        numBuckets++;
-      }
-      this.baseArray = new SList[numBuckets];
-      this.internalVertices = new DList2();
-      this.dictSize = 0; 
-      for (int i = 0; i < numBuckets; i++){
-        this.baseArray[i] = new SList();
-      }
-  }
 
   /** 
    *  Construct a new empty hash table with a default size.  Say, a prime in
    *  the neighborhood of 100.
    **/
-
   public HashTableChained() {
     int numBuckets = 101;
     this.baseArray = new SList[numBuckets];
@@ -69,8 +72,9 @@ public class HashTableChained implements Dictionary {
 
   /**
   *   A series of getters have been included for security purposes. 
+  *   getBaseArray() gets the baseArray field and returns it. 
+  *   getInternalValues() gets the internal DList representation and returns it. 
   **/
-
   public SList[] getBaseArray(){
     return this.baseArray;
   }
@@ -79,6 +83,9 @@ public class HashTableChained implements Dictionary {
     return this.internalVertices;
   }
 
+  /**
+  *   setInternalvertices() sets the internalDList to another DList. 
+  **/
   public void setInternalvertices(DList2 intV){
     this.internalVertices = intV;
   }
@@ -165,7 +172,6 @@ public class HashTableChained implements Dictionary {
     result = result + " " + "]";
     return result;
   }
-
   
   /**
   *   shrinkAndRehash() halves the leangth of baseArray 
@@ -250,6 +256,18 @@ public class HashTableChained implements Dictionary {
     this.dictSize++;
     return newEntry;
   }
+
+  /**
+  *   insertEdge() inserts a SListNode into the edgeHashTable and points it to the given destinations. 
+  *
+  *   @param the first vertex of the edge to be inserted. 
+  *   @param the second vertex of the edge to be inserted. 
+  *   @param the weight of the edge to be inserted. 
+  *   @param is the first DListNode2 containing the edge which the SListNode points to. 
+  *   @param is the second DListNode2 containing the edge on a different corresponding vertex which the SListNode points to. 
+  *   @return an Entry. 
+  *
+  **/
 
   public Entry insertEdge(Object u, Object v, int weight, DListNode2 pointer1, DListNode2 pointer2){
     if (this.loadFactor() > 0.75){
@@ -336,93 +354,11 @@ public class HashTableChained implements Dictionary {
     }
   }
 
+  /**
+  *   makes the hashTable Empty. Not used in this project so it was not filled out. 
+  **/
+
   public void makeEmpty(){
     return;
   }
-  
-  public static void main(String[] args){
-    HashTableChained newHashtable = new HashTableChained(20);
-    String a = "Hello";
-    String b = "My";
-    String c = "two";
-    String d = "one";
-    String e = "kk";
-    String f = "Onon";
-    String a1 = "a1";
-    String a2 = "a2";
-    String a3 = "a3";
-    String a4 = "a4";
-    String a5 = "a5";
-    String a6 = "a6";
-    String a7 = "a7"; 
-    String a8 = "a8";
-    String a9 = "a9";
-    String a10 = "a10";
-    String a11 = "a11";
-    String a12 = "a12";
-    String a13 = "a13";
-    
-    int code = a.hashCode();
-    int codeb = b.hashCode();
-    int codec = c.hashCode();
-    int coded = d.hashCode();
-    int codee = e.hashCode();
-    int codef = f.hashCode();
-    int codea1 = a1.hashCode();
-    int codea2 = a2.hashCode();
-    int codea3 = a3.hashCode();
-    int codea4 = a4.hashCode();
-    int codea5 = a5.hashCode();
-    int codea6 = a6.hashCode();
-    int codea7 = a7.hashCode();
-    int codea8 = a8.hashCode();
-    int codea9 = a9.hashCode();
-    int codea10 = a10.hashCode();
-    int codea11 = a11.hashCode();
-    int codea12 = a12.hashCode();
-    int codea13 = a13.hashCode();
-
-    newHashtable.insert(code,a);
-    newHashtable.insert(codeb,b);
-    newHashtable.insert(codec,c);
-    newHashtable.insert(coded,d);
-    newHashtable.insert(codee,e);
-    newHashtable.insert(codef,f);
-    newHashtable.insert(codea1,a1);
-    newHashtable.insert(codea2,a2);
-    newHashtable.insert(codea3,a3);
-    newHashtable.insert(codea4,a4);
-    newHashtable.insert(codea5,a5);
-    newHashtable.insert(codea6,a6);
-    newHashtable.insert(codea7,a7);
-    newHashtable.insert(codea8,a8);
-    newHashtable.insert(codea9,a9);
-    newHashtable.insert(codea10,a10);
-    newHashtable.insert(codea11,a11);
-    newHashtable.insert(codea12,a12);
-    newHashtable.insert(codea13,a13);
-
-    System.out.println(newHashtable.internalVertices);
-
-    System.out.println(newHashtable.remove("kk"));
-    System.out.println(newHashtable.remove("a1"));
-    System.out.println(newHashtable.remove("a2"));
-    System.out.println(newHashtable.remove("a3"));
-    System.out.println(newHashtable.remove("a4"));
-    System.out.println(newHashtable.remove("a5"));
-    System.out.println(newHashtable.remove("a6"));
-
-    System.out.println(codea10);
-    Entry newEntry = newHashtable.find(codea10);
-
-    System.out.println("Testing find, you should be getting [codea10, a10]: " + newEntry);
-
-
-    System.out.println(newHashtable.internalVertices);
-
-    for(int i = 0; i < newHashtable.baseArray.length; i++){
-      System.out.println(newHashtable.baseArray[i]);
-    }
-  }
-
 }

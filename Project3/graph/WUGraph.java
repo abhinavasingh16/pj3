@@ -32,7 +32,7 @@ public class WUGraph {
    * vertexCount() returns the number of vertices in the graph.
    *
    * Running time:  O(1).
-   */
+   **/
   public int vertexCount(){
     return this.vertexNumber;
   }
@@ -249,26 +249,6 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  private void switchWeight(Object u, Object v, int weight){
-    VertexPair newPair = new VertexPair(u,v);
-    Edge newEdge = new Edge(u,v,weight);
-    Entry newEntry = new Entry(newEdge,newEdge);
-    int hashCode = newPair.hashCode();
-    int whichBucket = edgeTable.compFunction(hashCode);
-    SListNode pointer =  edgeTable.baseArray[whichBucket].head();
-    while (pointer != null){
-        Entry vertexEntry =  pointer.entry();
-        Edge pointersEdge = ((Edge) vertexEntry.key());
-        VertexPair testPair = pointersEdge.vertexPair();
-        if (testPair.equals(newPair)){
-            pointer.listNode.setVertex(newEdge);
-            pointer.listNode2.setVertex(newEdge);
-            pointer.setEntry(newEntry);
-        }
-        pointer = pointer.next();
-    }
-  }
-
   public void addEdge(Object u, Object v, int weight){
     if(!this.isVertex(u) || !this.isVertex(v)){
       return;
@@ -349,6 +329,39 @@ public class WUGraph {
     }
   }
 
+  
+  /**
+  *   switchWeight() is activated when an edge already exists 
+  *   but the weight needs to be changed. 
+  *
+  *   @param is an vertex of the edge that needs to be added. 
+  *   @param is an vertex of the edge that needs to be added. 
+  *   @param is an in which represents the weight of the edge. 
+  *   @return nothing is returned. It just switches the weight with the new weight. 
+  *
+  **/
+
+
+  private void switchWeight(Object u, Object v, int weight){
+    VertexPair newPair = new VertexPair(u,v);
+    Edge newEdge = new Edge(u,v,weight);
+    Entry newEntry = new Entry(newEdge,newEdge);
+    int hashCode = newPair.hashCode();
+    int whichBucket = edgeTable.compFunction(hashCode);
+    SListNode pointer =  edgeTable.baseArray[whichBucket].head();
+    while (pointer != null){
+        Entry vertexEntry =  pointer.entry();
+        Edge pointersEdge = ((Edge) vertexEntry.key());
+        VertexPair testPair = pointersEdge.vertexPair();
+        if (testPair.equals(newPair)){
+            pointer.listNode.setVertex(newEdge);
+            pointer.listNode2.setVertex(newEdge);
+            pointer.setEntry(newEntry);
+        }
+        pointer = pointer.next();
+    }
+  }
+
   /**
    * removeEdge() removes an edge (u, v) from the graph.  If either of the
    * parameters u and v does not represent a vertex of the graph, the graph
@@ -357,28 +370,6 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-
-  private void removeFromTable(Object u, Object v){
-    if (!this.isVertex(u) || !this.isVertex(v)){
-      return;
-    }else{
-      int weight = this.weight(u,v);
-      Edge removalEdge = new Edge(u,v,weight);
-      VertexPair hashPair = removalEdge.vertexPair();
-      int hashCode = hashPair.hashCode();
-      int whichBucket = edgeTable.compFunction(hashCode);
-      SListNode pointer = edgeTable.baseArray[whichBucket].head();
-      
-      while (pointer != null){
-        Entry pointersEntry = pointer.entry();
-        Edge pointersEdge = ((Edge) pointersEntry.key());
-        if (removalEdge.equals(pointersEdge)){
-          edgeTable.baseArray[whichBucket].removeNode(pointer);
-        }
-        pointer = pointer.next();
-      }
-    }
-  }
   
   public void removeEdge(Object u, Object v){
     if (!this.isVertex(u) || !this.isVertex(v)){
@@ -453,6 +444,38 @@ public class WUGraph {
     }
   }
 
+
+  /**
+  *   removeFromTable() removes the edge (u,v) from the hashtable 
+  *   and internal DList. Nothing is returned. 
+  *   
+  *   runs in O(1) time. 
+  **/
+
+
+  private void removeFromTable(Object u, Object v){
+    if (!this.isVertex(u) || !this.isVertex(v)){
+      return;
+    }else{
+      int weight = this.weight(u,v);
+      Edge removalEdge = new Edge(u,v,weight);
+      VertexPair hashPair = removalEdge.vertexPair();
+      int hashCode = hashPair.hashCode();
+      int whichBucket = edgeTable.compFunction(hashCode);
+      SListNode pointer = edgeTable.baseArray[whichBucket].head();
+      
+      while (pointer != null){
+        Entry pointersEntry = pointer.entry();
+        Edge pointersEdge = ((Edge) pointersEntry.key());
+        if (removalEdge.equals(pointersEdge)){
+          edgeTable.baseArray[whichBucket].removeNode(pointer);
+        }
+        pointer = pointer.next();
+      }
+    }
+  }
+
+
   /**
    * isEdge() returns true if (u, v) is an edge of the graph.  Returns false
    * if (u, v) is not an edge (including the case where either of the
@@ -515,35 +538,6 @@ public class WUGraph {
       }
       pointer = pointer.next();
     }
-    System.out.println("Something is wrong!");
     return -100;
   }
-
-  public static void main(String[] args){
-    WUGraph g = new WUGraph();
-
-    System.out.println("__________Testing Degree_________");
-    g.addVertex(0);
-    g.addVertex(1);
-    System.out.println("g.degree(1) should be 0, you are getting: " + g.degree(1));
-    g.addVertex(2);
-    g.addVertex(3);
-    g.addVertex(4);
-    g.addVertex(5);
-    g.addVertex(6);
-    g.addVertex(7);
-    g.addVertex(8);
-    g.addEdge(1,2,1);
-    System.out.println("g.degree(1) should be 1, you are getting: " + g.degree(1));
-    g.addEdge(2,3,4);
-    g.addEdge(2,1,5);
-
-
-    
-
-    System.out.println("________Testing Remove________");
-    g.removeEdge(1,2);
-    System.out.println("g.degree(2) should be 0, you are getting: " + g.degree(1));
-  }
-
 }

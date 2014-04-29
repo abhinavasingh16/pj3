@@ -56,14 +56,24 @@ public class DListNode2 {
     return this.next;
   }
 
+  /**
+  *   prev() gets the previous DListNode that corresponds to this. 
+  **/
   public DListNode2 prev(){
     return this.prev;
   }
+
+  /**
+  *   setNext() sets a DListNode next1 as the next node to this. 
+  **/
 
   public void setNext(DListNode2 next1){
     this.next = next1;
   }
 
+  /**
+  *   setPrev() sets a DListNode prev1 as the prev node to this.
+  **/
   public void setPrev(DListNode2 prev1){
     this.prev = prev1;
   }
@@ -71,23 +81,36 @@ public class DListNode2 {
   /**
   *   This sets the corresponding list field to list1. 
   **/
-
   public void setList(DList2 list1){
     list = list1;
   }
 
+  /**
+  *   setVertex() sets the corresponding vertex of the 
+  *   DListNode to the object vertex2. 
+  **/
   public void setVertex(Object vertex2){
       this.vertex = vertex2;
   }
 
+  /**
+  *   list() returns the DList that the DListNode is pointing to. 
+  **/
   public DList2 list(){
     return this.list;
   }
 
+  /**
+  *   correspondingPair() returns the DListNode that the 
+  *   current node is pointing to. 
+  **/
   public DListNode2 correspondingPair(){
     return this.correspondingPair;
   }
 
+  /**
+  *   toString() method for debugging purposes. 
+  **/
   public String toString(){
     String result = "[ ";
     result = result + vertex + " ]";

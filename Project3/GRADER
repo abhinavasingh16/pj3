@@ -1,0 +1,17 @@
+Partner I: Abhinava Singh [Login: CS61B-KX]. 
+Partner II: Sagar Patel [Login: CS61B-OL]. 
+
+*********************GRADER FILE************************
+
+PART I DESIGN: The way we decided to design the graph was using two different chained hashTables which represent the edges and the vertex and a succession of DLists. 
+
+More specifically, we have a vertexTable  which is a hash table that hashes the vertices, we also have a edgeHasTable which hashes the edges. One important difference in the design was having the hashtable class mantain a DList that the SListNodes would point to. For the vertex table its internal DList would contain DListNodes that store the internal representation of the applications vertices. These nodes would store an Entry whose key was the object and whose value was the internal representation of the object. Futhermore, these DListNodes would also each point to a DList whoe DListNodes would store Edges (Lets call this the edge DList for brevity). My Edge class houses a vertexPair and a weight for the vertexPair. On the other side, the edgeTable's internal DList was not so important, and its SListNodes in each bucket would instead point to the corresponding DLists of the DListNodes on the vertexTable side. 
+
+The SListNodes on the vertexTable store Entries whose keys are the actual application vertex objects, and its values being the internal representation of vertices. 
+
+The SListnodes on the edgeTable side would store entries whose keys would be Edge objects and whose values would be Edges as well. These would hashto the edge DList. 
+
+The DListNodes in the internal epresentation of the vertex would store an internal representation of the real vertex objects and would point to the edgeDList. 
+
+The DListNodes in the edge DList would store Edges. 
+

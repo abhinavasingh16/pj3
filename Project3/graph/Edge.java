@@ -15,22 +15,32 @@ public class Edge{
 	}
 
 	/**
-	*	gets the weight for you. 
+	*	gets the weight for you and returns the int. 
 	**/
 	public int weight(){
 		return this.weight;
 	}
 
+	/**
+	*	vertexPair() returns a vertexPair that corresponds to the vertexPair field. 
+	**/
 	public VertexPair vertexPair(){
 		return this.vertexPair;
 	}
 
+	/**
+	*	toString() is a simple method that converts the object to a String for debugging purposes. 
+	**/
 	public String toString(){
 		String result = "{ ";
 		result = result + vertexPair.toString() + " }";
 		return result;
 	}
 
+
+	/**
+	*	equals() tests to see if a Edge is equal to another edge. 
+	**/
 	public boolean equals(Edge compEdge){
 		if (this.weight == compEdge.weight()){
 			if (vertexPair.equals(compEdge.vertexPair())){
@@ -41,16 +51,5 @@ public class Edge{
 		}else{
 			return false;
 		}
-	}
-
-	public static void main(String[] args){
-		Edge newEdge = new Edge(1,2,3);
-		Edge testEdge = new Edge(3,4,5);
-		Edge testEdge2 = new Edge(1,2,3);
-		Edge testEdge3 = new Edge(1,2,4);
-
-		System.out.println("newEdge.equals(testEdge) should return false, you are getting: " + newEdge.equals(testEdge));
-		System.out.println("newEdge.equals(testEdge2) should return true, you are getting: " + newEdge.equals(testEdge2));
-		System.out.println("newEdge.equals(testEdge3) should return false, you are getting: " + newEdge.equals(testEdge3));
 	}
 }
